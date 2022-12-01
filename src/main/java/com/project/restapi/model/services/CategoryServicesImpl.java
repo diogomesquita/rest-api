@@ -3,6 +3,8 @@ package com.project.restapi.model.services;
 import com.project.restapi.model.entities.Category;
 import com.project.restapi.model.repositories.CategoryRepository;
 import com.project.restapi.model.services.interfaces.CategoryService;
+import org.apache.catalina.User;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,5 +23,19 @@ public class CategoryServicesImpl implements CategoryService {
     public Category findById(UUID id) {
         Optional<Category> obj = categoryRepository.findById(id);
         return obj.get();
+    }
+
+    public Category save(Category obj) {
+        return categoryRepository.save(obj);
+    }
+
+    public void delete(UUID id) {
+        categoryRepository.deleteById(id);
+    }
+
+    public Category update(UUID id, Category obj) {
+        Category data = findById(id);
+        BeanUtils.copyProperties(obj, data, "id");
+        return categoryRepository.save(data);
     }
 }
