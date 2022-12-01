@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class CategoryServicesImpl implements CategoryService {
@@ -15,5 +17,9 @@ public class CategoryServicesImpl implements CategoryService {
 
     public List<Category> findAll() {
         return categoryRepository.findAll();
+    }
+    public Category findById(UUID id) {
+        Optional<Category> obj = categoryRepository.findById(id);
+        return obj.get();
     }
 }

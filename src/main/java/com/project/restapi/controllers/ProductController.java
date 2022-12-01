@@ -1,7 +1,7 @@
 package com.project.restapi.controllers;
 
-import com.project.restapi.model.entities.Category;
-import com.project.restapi.model.services.interfaces.CategoryService;
+import com.project.restapi.model.entities.Product;
+import com.project.restapi.model.services.interfaces.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,19 +14,21 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/categories")
-public class CategoryController {
+@RequestMapping("/products")
+public class ProductController {
+
     @Autowired
-    private CategoryService categoryService;
+    private ProductService productService;
 
     @GetMapping
-    public ResponseEntity<List<Category>> findAll() {
-        List<Category> list = categoryService.findAll();
+    public ResponseEntity<List<Product>> findAll() {
+        List<Product> list = productService.findAll();
         return ResponseEntity.status(HttpStatus.OK).body(list);
     }
+
     @GetMapping("/{id}")
-    public ResponseEntity<Category> findById(@PathVariable UUID id) {
-        Category obj = categoryService.findById(id);
+    public ResponseEntity<Product> findById(@PathVariable UUID id) {
+        Product obj = productService.findById(id);
         return ResponseEntity.status(HttpStatus.OK).body(obj);
     }
 }
