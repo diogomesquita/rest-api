@@ -11,4 +11,10 @@ public interface ProductService {
     public Product findById(UUID id);
 
     public Double getTotal();
+
+    public Product save(Product obj);
+
+    public Void delete(UUID id);
+
+    public Product update(UUID id, Product obj);
 }
