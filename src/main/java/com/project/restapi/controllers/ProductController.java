@@ -31,4 +31,10 @@ public class ProductController {
         Product obj = productService.findById(id);
         return ResponseEntity.status(HttpStatus.OK).body(obj);
     }
+
+    @GetMapping("/total")
+    public ResponseEntity<Double> valorTotal(){
+        Double obj = productService.getTotal();
+        return ResponseEntity.status(HttpStatus.OK).body(obj);
+    }
 }

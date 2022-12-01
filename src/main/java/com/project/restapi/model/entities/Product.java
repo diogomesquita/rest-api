@@ -1,13 +1,13 @@
 package com.project.restapi.model.entities;
 
 import com.project.restapi.model.entities.enums.ProductStatus;
+import com.project.restapi.model.repositories.ProductRepository;
 import jakarta.persistence.*;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
+
 @Entity
 @Table(name = "tb_product")
 public class Product implements Serializable {

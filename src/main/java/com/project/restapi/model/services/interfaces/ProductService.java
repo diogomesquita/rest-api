@@ -9,4 +9,6 @@ public interface ProductService {
     public List<Product> findAll();
 
     public Product findById(UUID id);
+
+    public Double getTotal();
 }
