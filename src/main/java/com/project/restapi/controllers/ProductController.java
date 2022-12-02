@@ -2,6 +2,7 @@ package com.project.restapi.controllers;
 
 import com.project.restapi.model.entities.Product;
 import com.project.restapi.model.services.interfaces.ProductService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,7 +37,7 @@ public class ProductController {
     }
 
     @PostMapping
-    public ResponseEntity<Product> save(@RequestBody Product obj) {
+    public ResponseEntity<Product> save(@RequestBody @Valid Product obj) {
         obj = productService.save(obj);
         return ResponseEntity.status(HttpStatus.CREATED).body(obj);
     }
@@ -47,7 +48,7 @@ public class ProductController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Product> update(@PathVariable UUID id, @RequestBody Product obj) {
+    public ResponseEntity<Product> update(@PathVariable UUID id, @RequestBody @Valid Product obj) {
         obj = productService.update(id, obj);
         return ResponseEntity.status(HttpStatus.OK).body(obj);
     }

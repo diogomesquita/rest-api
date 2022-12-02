@@ -1,5 +1,6 @@
 package com.project.restapi.model.services;
 
+import com.project.restapi.exceptions.NotFoundExceptions;
 import com.project.restapi.model.entities.Product;
 import com.project.restapi.model.entities.enums.ProductStatus;
 import com.project.restapi.model.repositories.ProductRepository;
@@ -23,7 +24,9 @@ public class ProductServiceImpl implements ProductService {
 
     public Product findById(UUID id) {
         Optional<Product> obj = productRepository.findById(id);
-        return obj.get();
+        return obj.orElseThrow(() -> {
+            return new NotFoundExceptions(id);
+        });
     }
 
     public Double getTotal() {

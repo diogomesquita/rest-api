@@ -2,6 +2,7 @@ package com.project.restapi.controllers;
 
 import com.project.restapi.model.entities.Category;
 import com.project.restapi.model.services.interfaces.CategoryService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,7 +29,7 @@ public class CategoryController {
     }
 
     @PostMapping
-    public ResponseEntity<Category> save(@RequestBody Category obj) {
+    public ResponseEntity<Category> save(@RequestBody @Valid Category obj) {
         obj = categoryService.save(obj);
         return ResponseEntity.status(HttpStatus.CREATED).body(obj);
     }
@@ -40,7 +41,7 @@ public class CategoryController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Category> update(@PathVariable UUID id,@RequestBody Category obj) {
+    public ResponseEntity<Category> update(@PathVariable UUID id,@RequestBody @Valid Category obj) {
         obj = categoryService.update(id, obj);
         return ResponseEntity.status(HttpStatus.OK).body(obj);
     }

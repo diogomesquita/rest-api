@@ -1,11 +1,15 @@
 package com.project.restapi.model.services;
 
+import com.project.restapi.exceptions.DBexceptions;
+import com.project.restapi.exceptions.NotFoundExceptions;
 import com.project.restapi.model.entities.Category;
 import com.project.restapi.model.repositories.CategoryRepository;
 import com.project.restapi.model.services.interfaces.CategoryService;
 import org.apache.catalina.User;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,7 +26,9 @@ public class CategoryServicesImpl implements CategoryService {
     }
     public Category findById(UUID id) {
         Optional<Category> obj = categoryRepository.findById(id);
-        return obj.get();
+        return obj.orElseThrow(() -> {
+            return new NotFoundExceptions(id);
+        });
     }
 
     public Category save(Category obj) {
@@ -30,7 +36,13 @@ public class CategoryServicesImpl implements CategoryService {
     }
 
     public void delete(UUID id) {
-        categoryRepository.deleteById(id);
+        try {
+            categoryRepository.deleteById(id);
+        } catch (EmptyResultDataAccessException e) {
+            throw new NotFoundExceptions(id);
+        } catch (DataIntegrityViolationException e) {
+            throw new DBexceptions(e.getMessage());
+        }
     }
 
     public Category update(UUID id, Category obj) {
