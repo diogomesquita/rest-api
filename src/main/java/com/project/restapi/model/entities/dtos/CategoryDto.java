@@ -1,6 +1,6 @@
 package com.project.restapi.model.entities.dtos;
 
-import jakarta.validation.constraints.NotBlank;
+import javax.validation.constraints.NotBlank;
 
 public class CategoryDto {
     @NotBlank(message = "Required data")

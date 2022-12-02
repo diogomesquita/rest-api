@@ -1,8 +1,7 @@
 package com.project.restapi.model.entities;
 
 import com.project.restapi.model.entities.enums.ProductStatus;
-import jakarta.persistence.*;
-
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.*;
 
@@ -13,7 +12,7 @@ public class Product implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
+    private Long id;
     @Column(nullable = false)
     private String name;
     @Column(nullable = false)
@@ -28,18 +27,18 @@ public class Product implements Serializable {
 
     public Product() {}
 
-    public Product(UUID id, String name, Double price, ProductStatus productStatus) {
+    public Product(Long id, String name, Double price, ProductStatus productStatus) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.productStatus = productStatus;
     }
 
-    public UUID getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(UUID id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
