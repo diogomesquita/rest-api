@@ -19,7 +19,7 @@ import java.util.UUID;
 
 @Api(value = "Category Rest API")
 @RestController
-//@CrossOrigin(origins = "*", maxAge = 3600)
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RequestMapping("/categories")
 public class CategoryController {
     @Autowired

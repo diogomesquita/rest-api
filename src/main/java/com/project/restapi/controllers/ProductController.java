@@ -20,7 +20,7 @@ import java.util.UUID;
 
 @Api("Products Rest API")
 @RestController
-//@CrossOrigin(origins = "*", maxAge = 3600)
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RequestMapping("/products")
 public class ProductController {
 
