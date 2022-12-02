@@ -1,10 +1,11 @@
 package com.project.restapi.controllers;
 
-import com.project.restapi.exceptions.DBexceptions;
 import com.project.restapi.exceptions.NotFoundExceptions;
 import com.project.restapi.model.entities.Product;
+import com.project.restapi.model.entities.dtos.ProductDto;
 import com.project.restapi.model.services.interfaces.ProductService;
 import jakarta.validation.Valid;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
@@ -15,6 +16,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RequestMapping("/products")
 public class ProductController {
 
@@ -40,7 +42,9 @@ public class ProductController {
     }
 
     @PostMapping
-    public ResponseEntity<Product> save(@RequestBody @Valid Product obj) {
+    public ResponseEntity<Product> save(@RequestBody @Valid ProductDto dto) {
+        var obj = new Product();
+        BeanUtils.copyProperties(dto, obj);
         obj = productService.save(obj);
         return ResponseEntity.status(HttpStatus.CREATED).body(obj);
     }

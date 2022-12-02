@@ -1,10 +1,7 @@
 package com.project.restapi.model.entities;
 
 import com.project.restapi.model.entities.enums.ProductStatus;
-import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
 
 import java.io.Serializable;
 import java.util.*;
@@ -17,10 +14,8 @@ public class Product implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
-    @NotBlank(message = "Required data")
     @Column(nullable = false)
     private String name;
-    @NotNull(message = "Required data")
     @Column(nullable = false)
     private Double price;
     private ProductStatus productStatus;

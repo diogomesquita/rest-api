@@ -1,5 +1,6 @@
 package com.project.restapi.model.services;
 
+import com.project.restapi.exceptions.DBexceptions;
 import com.project.restapi.exceptions.NotFoundExceptions;
 import com.project.restapi.model.entities.Product;
 import com.project.restapi.model.entities.enums.ProductStatus;
@@ -41,6 +42,12 @@ public class ProductServiceImpl implements ProductService {
     }
 
     public Product save(Product obj) {
+
+        if(productRepository.existsByName(obj.getName())) {
+            String message = String.format("Unavailable Name.%nThe product %s is already registered",obj.getName());
+            throw new DBexceptions(message);
+        }
+
         return productRepository.save(obj);
     }
 

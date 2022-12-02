@@ -1,8 +1,10 @@
 package com.project.restapi.controllers;
 
 import com.project.restapi.model.entities.Category;
+import com.project.restapi.model.entities.dtos.CategoryDto;
 import com.project.restapi.model.services.interfaces.CategoryService;
 import jakarta.validation.Valid;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +14,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
+@CrossOrigin(origins = "*", maxAge = 3600)
 @RequestMapping("/categories")
 public class CategoryController {
     @Autowired
@@ -29,7 +32,9 @@ public class CategoryController {
     }
 
     @PostMapping
-    public ResponseEntity<Category> save(@RequestBody @Valid Category obj) {
+    public ResponseEntity<Category> save(@RequestBody @Valid CategoryDto dto) {
+        var obj = new Category();
+        BeanUtils.copyProperties(dto, obj);
         obj = categoryService.save(obj);
         return ResponseEntity.status(HttpStatus.CREATED).body(obj);
     }

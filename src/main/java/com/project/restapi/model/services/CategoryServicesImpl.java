@@ -31,7 +31,11 @@ public class CategoryServicesImpl implements CategoryService {
     }
 
     public Category save(Category obj) {
-        return categoryRepository.save(obj);
+        try {
+            return categoryRepository.save(obj);
+        } catch (DataIntegrityViolationException e) {
+            throw new DBexceptions(e.getMessage());
+        }
     }
 
     public void delete(UUID id) {
