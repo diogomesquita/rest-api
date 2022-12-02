@@ -2,7 +2,7 @@ package com.project.restapi.model.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotBlank;
 
 import java.io.Serializable;
 import java.util.HashSet;
@@ -17,7 +17,7 @@ public class Category implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
-    @NotNull(message = "Required data")
+    @NotBlank(message = "Required data")
     @Column(nullable = false, unique = true)
     private String name;
     private String description;

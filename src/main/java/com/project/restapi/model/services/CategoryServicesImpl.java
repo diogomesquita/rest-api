@@ -5,7 +5,6 @@ import com.project.restapi.exceptions.NotFoundExceptions;
 import com.project.restapi.model.entities.Category;
 import com.project.restapi.model.repositories.CategoryRepository;
 import com.project.restapi.model.services.interfaces.CategoryService;
-import org.apache.catalina.User;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;

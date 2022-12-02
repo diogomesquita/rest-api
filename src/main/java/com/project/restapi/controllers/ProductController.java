@@ -1,9 +1,12 @@
 package com.project.restapi.controllers;
 
+import com.project.restapi.exceptions.DBexceptions;
+import com.project.restapi.exceptions.NotFoundExceptions;
 import com.project.restapi.model.entities.Product;
 import com.project.restapi.model.services.interfaces.ProductService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -43,8 +46,12 @@ public class ProductController {
     }
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable UUID id) {
-        productService.delete(id);
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        try {
+            productService.delete(id);
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        } catch (EmptyResultDataAccessException e) {
+            throw new NotFoundExceptions(e.getMessage());
+        }
     }
 
     @PutMapping("/{id}")

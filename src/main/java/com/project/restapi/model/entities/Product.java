@@ -17,7 +17,7 @@ public class Product implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
-    @NotNull(message = "Required data")
+    @NotBlank(message = "Required data")
     @Column(nullable = false)
     private String name;
     @NotNull(message = "Required data")
