@@ -12,7 +12,7 @@ The project's achievement is the development of a Rest API for a shopping list (
 - JPA / Hibernate
 - Maven
 - Postgresql
-
-## Autor
+___
+## Author
 Diogo Mesquita  
 https://www.linkedin.com/in/eu-diogo-mesquita/
