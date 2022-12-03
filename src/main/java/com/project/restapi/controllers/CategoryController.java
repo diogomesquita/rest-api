@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.UUID;
 
 @Api(value = "Category Rest API")
 @RestController
@@ -34,7 +33,7 @@ public class CategoryController {
 
     @ApiOperation(value = "Search Category by ID")
     @GetMapping("/{id}")
-    public ResponseEntity<Category> findById(@PathVariable UUID id) {
+    public ResponseEntity<Category> findById(@PathVariable Long id) {
         Category obj = categoryService.findById(id);
         return ResponseEntity.status(HttpStatus.OK).body(obj);
     }
@@ -50,14 +49,14 @@ public class CategoryController {
 
     @ApiOperation(value = "Delete Category by ID")
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable UUID id) {
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
         categoryService.delete(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
     @ApiOperation(value = "Update Category")
     @PutMapping("/{id}")
-    public ResponseEntity<Category> update(@PathVariable UUID id,@RequestBody @Valid Category obj) {
+    public ResponseEntity<Category> update(@PathVariable Long id,@RequestBody @Valid Category obj) {
         obj = categoryService.update(id, obj);
         return ResponseEntity.status(HttpStatus.OK).body(obj);
     }

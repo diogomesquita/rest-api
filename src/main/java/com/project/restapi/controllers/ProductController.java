@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
-import java.util.UUID;
 
 @Api("Products Rest API")
 @RestController
@@ -36,7 +35,7 @@ public class ProductController {
 
     @ApiOperation(value = "Search Product by ID")
     @GetMapping("/{id}")
-    public ResponseEntity<Product> findById(@PathVariable UUID id) {
+    public ResponseEntity<Product> findById(@PathVariable Long id) {
         Product obj = productService.findById(id);
         return ResponseEntity.status(HttpStatus.OK).body(obj);
     }
@@ -57,9 +56,9 @@ public class ProductController {
         return ResponseEntity.status(HttpStatus.CREATED).body(obj);
     }
 
-    @ApiOperation(value = "Delete by ID")
+    @ApiOperation(value = "Delete Product by ID")
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable UUID id) {
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
         try {
             productService.delete(id);
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
@@ -70,7 +69,7 @@ public class ProductController {
 
     @ApiOperation(value = "Update Product")
     @PutMapping("/{id}")
-    public ResponseEntity<Product> update(@PathVariable UUID id, @RequestBody @Valid Product obj) {
+    public ResponseEntity<Product> update(@PathVariable Long id, @RequestBody @Valid Product obj) {
         obj = productService.update(id, obj);
         return ResponseEntity.status(HttpStatus.OK).body(obj);
     }

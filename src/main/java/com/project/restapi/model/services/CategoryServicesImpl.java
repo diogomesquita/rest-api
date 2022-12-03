@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @Service
 public class CategoryServicesImpl implements CategoryService {
@@ -23,7 +22,7 @@ public class CategoryServicesImpl implements CategoryService {
     public List<Category> findAll() {
         return categoryRepository.findAll();
     }
-    public Category findById(UUID id) {
+    public Category findById(Long id) {
         Optional<Category> obj = categoryRepository.findById(id);
         return obj.orElseThrow(() -> {
             return new NotFoundExceptions(id);
@@ -38,7 +37,7 @@ public class CategoryServicesImpl implements CategoryService {
         }
     }
 
-    public void delete(UUID id) {
+    public void delete(Long id) {
         try {
             categoryRepository.deleteById(id);
         } catch (EmptyResultDataAccessException e) {
@@ -48,7 +47,7 @@ public class CategoryServicesImpl implements CategoryService {
         }
     }
 
-    public Category update(UUID id, Category obj) {
+    public Category update(Long id, Category obj) {
         Category data = findById(id);
         BeanUtils.copyProperties(obj, data, "id");
         return categoryRepository.save(data);

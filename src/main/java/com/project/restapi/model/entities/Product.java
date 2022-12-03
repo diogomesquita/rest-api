@@ -1,5 +1,6 @@
 package com.project.restapi.model.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.project.restapi.model.entities.enums.ProductStatus;
 import javax.persistence.*;
 import java.io.Serializable;
@@ -19,19 +20,18 @@ public class Product implements Serializable {
     private Double price;
     private ProductStatus productStatus;
 
-    @ManyToMany
-    @JoinTable(name = "tb_product_category",
-            joinColumns = @JoinColumn(name = "product_id"),
-            inverseJoinColumns = @JoinColumn(name = "category_id"))
-    private Set<Category> categories = new HashSet<>();
+    @ManyToOne
+    @JoinColumn(name = "category_id")
+    private Category category;
 
     public Product() {}
 
-    public Product(Long id, String name, Double price, ProductStatus productStatus) {
+    public Product(Long id, String name, Double price, ProductStatus productStatus, Category category) {
         this.id = id;
         this.name = name;
         this.price = price;
         this.productStatus = productStatus;
+        this.category = category;
     }
 
     public Long getId() {
@@ -66,8 +66,12 @@ public class Product implements Serializable {
         this.productStatus = productStatus;
     }
 
-    public Set<Category> getCategories() {
-        return categories;
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     @Override
