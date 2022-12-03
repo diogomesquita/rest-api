@@ -1,6 +1,5 @@
 package com.project.restapi.model.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.project.restapi.model.entities.enums.ProductStatus;
 import javax.persistence.*;
 import java.io.Serializable;
