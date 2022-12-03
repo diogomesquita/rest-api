@@ -2,7 +2,7 @@
 Evalueted project of FuturoDev's program powered by Senai/SC-Brazil.  
 The project's achievement is the development of a Rest API for a shopping list (Basically a CRUD).
 
-## Concept Model
+## Relational Model
 ![Concept_Model](https://github.com/diogomesquita/ibagens/blob/main/labshoppinglist-restapi/relational%20model.png)
 
 ## Technologies
