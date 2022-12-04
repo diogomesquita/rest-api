@@ -1,8 +1,17 @@
 package com.project.restapi.model.entities.dtos;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class ProductDto {
 
     @NotBlank(message = "Required data")
@@ -10,26 +19,4 @@ public class ProductDto {
     @NotNull(message = "Required data")
     private Double price;
 
-    public ProductDto() {}
-
-    public ProductDto(String name, Double price) {
-        this.name = name;
-        this.price = price;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Double getPrice() {
-        return price;
-    }
-
-    public void setPrice(Double price) {
-        this.price = price;
-    }
 }

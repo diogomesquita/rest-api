@@ -1,6 +1,10 @@
 package com.project.restapi.model.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -10,6 +14,10 @@ import java.util.Set;
 
 @Entity
 @Table(name = "tb_category")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 public class Category implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -23,39 +31,8 @@ public class Category implements Serializable {
     @OneToMany(mappedBy = "category")
     private Set<Product> products = new HashSet<>();
 
-    public Category() {}
-
-    public Category(Long id, String name, String description) {
-        this.id = id;
+    public Category(String name, String description) {
         this.name = name;
         this.description = description;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Set<Product> getProducts() {
-        return products;
     }
 }
