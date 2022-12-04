@@ -48,8 +48,12 @@ public class CategoryServicesImpl implements CategoryService {
     }
 
     public Category update(Long id, Category obj) {
-        Category data = findById(id);
-        BeanUtils.copyProperties(obj, data, "id");
-        return categoryRepository.save(data);
+        try {
+            Category data = findById(id);
+            BeanUtils.copyProperties(obj, data, "id");
+            return categoryRepository.save(data);
+        } catch (DataIntegrityViolationException e) {
+            throw new DBexceptions(e.getMessage());
+        }
     }
 }

@@ -8,6 +8,7 @@ import com.project.restapi.model.repositories.ProductRepository;
 import com.project.restapi.model.services.interfaces.ProductService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -56,8 +57,12 @@ public class ProductServiceImpl implements ProductService {
     }
 
     public Product update(Long id, Product obj){
-        Product data = findById(id);
-        BeanUtils.copyProperties(obj, data, "id");
-        return productRepository.save(data);
+        try {
+            Product data = findById(id);
+            BeanUtils.copyProperties(obj, data, "id");
+            return productRepository.save(data);
+        } catch (DataIntegrityViolationException e) {
+            throw new DBexceptions(e.getMessage());
+        }
     }
 }
