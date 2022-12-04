@@ -8,9 +8,9 @@ The project's achievement is the development of a Rest API for a shopping list (
 ## Technologies
 ### Back end
 - Java
+- Maven
 - Spring Boot
 - JPA / Hibernate
-- Maven
 - Postgresql
 ___
 ## Author
